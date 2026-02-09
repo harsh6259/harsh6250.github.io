@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>IoT Developer Portfolio</title>
     <style>
-        /* INLINE CSS */
         :root {
             --bg: #0f172a;
             --card-bg: #1e293b;
@@ -18,7 +17,6 @@
             color: var(--text);
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
-            padding: 0;
             line-height: 1.6;
         }
 
@@ -35,8 +33,7 @@
         }
 
         h1 { margin: 0; color: var(--accent); font-size: 2.5rem; }
-        
-        /* Project Grid */
+
         .project-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -89,7 +86,6 @@
             margin-top: 10px;
         }
 
-        /* Responsive */
         @media (max-width: 600px) {
             h1 { font-size: 1.8rem; }
         }
@@ -97,72 +93,136 @@
 </head>
 <body>
 
-    <header>
-        <h1>IoT Solutions Architect</h1>
-        <p>Connecting the physical world with the digital cloud.</p>
-        <div id="status-chip" style="display:inline-block; padding: 5px 15px; border-radius: 20px; border: 1px solid #22c55e; color: #22c55e; font-size: 0.8rem;">
-            ● System Online
+<header>
+    <h1>IoT + Web + Firmware Solutions Architect</h1>
+    <h2>on demand services</h2>
+    <p>Connecting the physical world with the digital cloud.</p>
+    <div id="status-chip" style="display:inline-block; padding: 5px 15px; border-radius: 20px; border: 1px solid #22c55e; color: #22c55e; font-size: 0.8rem;">
+        ● System Online
+    </div>
+</header>
+
+<div class="container">
+
+    <!-- Hardware Projects -->
+    <h2 style="border-left: 4px solid var(--accent); padding-left: 15px;">Hardware Projects</h2>
+    <div class="project-grid">
+        <div class="card">
+            <div class="card-body">
+                <span class="tag">ESP32</span><span class="tag">MQTT</span>
+                <h3>Smart Home Gateway</h3>
+                <p>Zigbee to MQTT gateway with Node-RED dashboard and local automation.</p>
+                <!-- <button onclick="showAlert('Smart Home Gateway')">Details</button> -->
+            </div>
         </div>
-    </header>
 
-    <div class="container">
-        <h2 style="border-left: 4px solid var(--accent); padding-left: 15px;">Hardware Projects</h2>
-        
-        <div class="project-grid" id="projectGallery">
-            <div class="card">
-                <div class="card-img"> [ IMAGE: Smart Home Hub ] </div>
-                <div class="card-body">
-                    <span class="tag">ESP32</span><span class="tag">MQTT</span>
-                    <h3>Smart Home Gateway</h3>
-                    <p>A central hub that connects Zigbee sensors to a local Dashboard via Node-Red.</p>
-                    <button onclick="showAlert('Smart Home')">Details</button>
-                </div>
+        <div class="card">
+            <div class="card-body">
+                <span class="tag">LoRaWAN</span><span class="tag">Arduino</span>
+                <h3>Soil Monitoring Node</h3>
+                <p>Ultra-low power soil sensor transmitting data up to 5km.</p>
+                <!-- <button onclick="showAlert('Soil Monitoring Node')">Details</button> -->
             </div>
+        </div>
 
-            <div class="card">
-                <div class="card-img"> [ IMAGE: Agri-Tech Node ] </div>
-                <div class="card-body">
-                    <span class="tag">LoRaWAN</span><span class="tag">Arduino</span>
-                    <h3>Soil Monitoring Node</h3>
-                    <p>Battery-powered sensor node transmitting soil data over 5km using LoRa technology.</p>
-                    <button onclick="showAlert('Agri-Tech')">Details</button>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-img"> [ IMAGE: Asset Tracker ] </div>
-                <div class="card-body">
-                    <span class="tag">Cellular</span><span class="tag">GPS</span>
-                    <h3>GPS Asset Tracker</h3>
-                    <p>Real-time fleet tracking using LTE-M and integrated Google Maps API.</p>
-                    <button onclick="showAlert('GPS Tracker')">Details</button>
-                </div>
+        <div class="card">
+            <div class="card-body">
+                <span class="tag">LTE-M</span><span class="tag">GPS</span>
+                <h3>GPS Asset Tracker</h3>
+                <p>Live tracking device with cloud sync and geofencing.</p>
+                <!-- <button onclick="showAlert('GPS Asset Tracker')">Details</button> -->
             </div>
         </div>
     </div>
 
-    <footer style="text-align: center; padding: 4rem; color: #64748b; font-size: 0.9rem;">
-        &copy; 2026 IoT Portfolio • Built with simple HTML/CSS
-    </footer>
+    <!-- Firmware Solutions -->
+    <h2 style="margin-top:4rem; border-left: 4px solid var(--accent); padding-left: 15px;">Firmware Solutions</h2>
+    <div class="project-grid">
+        <div class="card">
+            <div class="card-body">
+                <span class="tag">BMS</span><span class="tag">CAN</span>
+                <h3>Battery Management System</h3>
+                <p>Cell balancing, SOC/SOH estimation, protection logic, CAN communication.</p>
+                <!-- <button onclick="showAlert('BMS Firmware')">Details</button> -->
+            </div>
+        </div>
 
-    <script>
-        // INLINE JS
-        function showAlert(projectName) {
-            alert("You are viewing details for: " + projectName + "\n\nIn a full app, this would link to a GitHub repo or a technical documentation page.");
-        }
+        <div class="card">
+            <div class="card-body">
+                <span class="tag">SMPS</span><span class="tag">PID</span>
+                <h3>Smart Charger Firmware</h3>
+                <p>Adaptive charging algorithms with temperature and voltage protection.</p>
+                <!-- <button onclick="showAlert('Smart Charger Firmware')">Details</button> -->
+            </div>
+        </div>
 
-        // Simple interactive feature: Change status color on click
-        const chip = document.getElementById('status-chip');
-        chip.addEventListener('click', () => {
-            chip.style.borderColor = "#38bdf8";
-            chip.style.color = "#38bdf8";
-            chip.innerText = "● Data Syncing...";
-            setTimeout(() => {
-                chip.style.borderColor = "#22c55e";
-                chip.style.color = "#22c55e";
-                chip.innerText = "● System Online";
-            }, 2000);
-        });
-    </script>
+        <div class="card">
+            <div class="card-body">
+                <span class="tag">Inverter</span><span class="tag">DSP</span>
+                <h3>Inverter Control System</h3>
+                <p>SPWM control, fault handling, grid-tie & off-grid logic.</p>
+                <!-- <button onclick="showAlert('Inverter Firmware')">Details</button> -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Web / App & SaaS -->
+    <h2 style="margin-top:4rem; border-left: 4px solid var(--accent); padding-left: 15px;">Web, App & SaaS Solutions</h2>
+    <div class="project-grid">
+        <div class="card">
+            
+            <div class="card-body">
+                <span class="tag">Dashboard</span><span class="tag">Web</span>
+                <h3>User Monitoring Dashboard</h3>
+                <p>Real-time device data visualization, alerts, and analytics.</p>
+                <!-- <button onclick="showAlert('IoT Dashboard')">Details</button> -->
+            </div>
+        </div>
+
+        <div class="card">
+            
+            <div class="card-body">
+                <span class="tag">Android</span><span class="tag">iOS</span>
+                <h3>Mobile Control App</h3>
+                <p>User-friendly app to monitor and control IoT devices remotely.</p>
+                <!-- <button onclick="showAlert('Mobile App')">Details</button> -->
+            </div>
+        </div>
+
+        <div class="card">
+            
+            <div class="card-body">
+                <span class="tag">API</span><span class="tag">SaaS</span>
+                <h3>Cloud API & SaaS Platform</h3>
+                <p>Secure REST APIs, multi-tenant SaaS, device management & billing.</p>
+                <!-- <button onclick="showAlert('SaaS Platform')">Details</button> -->
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<footer style="text-align: center; padding: 4rem; color: #64748b; font-size: 0.9rem;">
+    &copy; 2026 IoT & data
+</footer>
+
+<script>
+function showAlert(projectName) {
+    alert("");
+}
+
+const chip = document.getElementById('status-chip');
+chip.addEventListener('click', () => {
+    chip.style.borderColor = "#38bdf8";
+    chip.style.color = "#38bdf8";
+    chip.innerText = "● Data Syncing...";
+    setTimeout(() => {
+        chip.style.borderColor = "#22c55e";
+        chip.style.color = "#22c55e";
+        chip.innerText = "● System Online";
+    }, 2000);
+});
+</script>
+
 </body>
 </html>
