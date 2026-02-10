@@ -1,0 +1,978 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Developer Portfolio | Latest Projects</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #6366f1;
+            --secondary-color: #8b5cf6;
+            --accent-color: #ec4899;
+            --light-bg: #f8fafc;
+            --card-bg: #ffffff;
+            --text-primary: #1e293b;
+            --text-secondary: #64748b;
+            --success-color: #10b981;
+            --border-color: #e2e8f0;
+            --gradient-1: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --gradient-2: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --gradient-3: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            line-height: 1.6;
+            background: var(--light-bg);
+            color: var(--text-primary);
+            overflow-x: hidden;
+        }
+
+        /* Animated background */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .bg-animation::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at 20% 50%, rgba(99, 102, 241, 0.1) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 80%, rgba(139, 92, 246, 0.1) 0%, transparent 50%),
+                        radial-gradient(circle at 40% 20%, rgba(236, 72, 153, 0.1) 0%, transparent 50%);
+            animation: moveBackground 20s ease-in-out infinite;
+        }
+
+        @keyframes moveBackground {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(-50px, -50px); }
+        }
+
+        /* Header Styles */
+        .main-header {
+            text-align: center;
+            padding: 5rem 2rem 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .main-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--primary-color), transparent);
+        }
+
+        .main-header h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 800;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+            animation: fadeInDown 1s ease-out;
+        }
+
+        .main-header p {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            animation: fadeInUp 1s ease-out 0.2s backwards;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Container */
+        .portfolio-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem 4rem;
+        }
+
+        /* Project Cards */
+        .project-card {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 3rem;
+            margin-bottom: 4rem;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(99, 102, 241, 0.1);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            animation: fadeInScale 0.6s ease-out backwards;
+        }
+
+        .project-card:nth-child(1) { animation-delay: 0.1s; }
+        .project-card:nth-child(2) { animation-delay: 0.2s; }
+        .project-card:nth-child(3) { animation-delay: 0.3s; }
+
+        @keyframes fadeInScale {
+            from {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gradient-1);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .project-card:nth-child(2)::before {
+            background: var(--gradient-2);
+        }
+
+        .project-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(99, 102, 241, 0.3);
+            box-shadow: 0 20px 60px rgba(99, 102, 241, 0.2);
+        }
+
+        .project-card:hover::before {
+            opacity: 1;
+        }
+
+        /* Project Header */
+        .project-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .project-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 15px;
+            background: var(--gradient-1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.75rem;
+            flex-shrink: 0;
+        }
+
+        .project-card:nth-child(2) .project-icon {
+            background: var(--gradient-2);
+        }
+
+        .project-info h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .project-info .description {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            line-height: 1.8;
+        }
+
+        /* Tags */
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            margin-bottom: 2rem;
+        }
+
+        .tag {
+            padding: 0.5rem 1rem;
+            background: rgba(99, 102, 241, 0.1);
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            border-radius: 20px;
+            font-size: 0.875rem;
+            color: var(--primary-color);
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .tag:hover {
+            background: rgba(99, 102, 241, 0.2);
+            transform: translateY(-2px);
+        }
+
+        /* Features List */
+        .features {
+            list-style: none;
+            margin-bottom: 2.5rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1rem;
+        }
+
+        .features li {
+            padding: 1rem;
+            background: rgba(99, 102, 241, 0.05);
+            border-radius: 10px;
+            border-left: 3px solid var(--primary-color);
+            transition: all 0.3s ease;
+        }
+
+        .features li:hover {
+            background: rgba(99, 102, 241, 0.1);
+            transform: translateX(5px);
+        }
+
+        .features li strong {
+            color: var(--success-color);
+            display: block;
+            margin-bottom: 0.25rem;
+            font-size: 0.95rem;
+        }
+
+        /* Gallery Styles */
+        .gallery-section {
+            margin-top: 2.5rem;
+        }
+
+        .gallery-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .gallery-header h3 {
+            font-size: 1.5rem;
+            color: var(--text-primary);
+        }
+
+        .view-toggle {
+            display: flex;
+            gap: 0.5rem;
+            background: rgba(99, 102, 241, 0.1);
+            padding: 0.25rem;
+            border-radius: 10px;
+        }
+
+        .view-btn {
+            padding: 0.5rem 1rem;
+            background: transparent;
+            border: none;
+            color: var(--text-secondary);
+            cursor: pointer;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+
+        .view-btn.active {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .project-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .project-gallery.masonry {
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            grid-auto-rows: 200px;
+        }
+
+        .gallery-item {
+            position: relative;
+            border-radius: 12px;
+            overflow: hidden;
+            cursor: pointer;
+            background: rgba(15, 23, 42, 0.5);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .project-gallery.masonry .gallery-item:nth-child(3n + 1) {
+            grid-row: span 2;
+        }
+
+        .gallery-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.4), rgba(236, 72, 153, 0.4));
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            z-index: 1;
+        }
+
+        .gallery-item:hover::before {
+            opacity: 1;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .gallery-item:hover {
+            box-shadow: 0 15px 40px rgba(99, 102, 241, 0.3);
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 1.5rem;
+            background: linear-gradient(to top, rgba(15, 23, 42, 0.95), transparent);
+            transform: translateY(100%);
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 2;
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            transform: translateY(0);
+        }
+
+        .gallery-overlay p {
+            color: var(--text-primary);
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+
+        /* Lightbox */
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(15, 23, 42, 0.95);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(10px);
+            animation: fadeIn 0.3s ease;
+        }
+
+        .lightbox.active {
+            display: flex;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .lightbox-content {
+            max-width: 90%;
+            max-height: 90%;
+            position: relative;
+            animation: zoomIn 0.3s ease;
+        }
+
+        @keyframes zoomIn {
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        .lightbox-content img {
+            max-width: 100%;
+            max-height: 85vh;
+            border-radius: 12px;
+            box-shadow: 0 25px 100px rgba(0, 0, 0, 0.5);
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: -50px;
+            right: 0;
+            background: rgba(239, 68, 68, 0.9);
+            border: none;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .lightbox-close:hover {
+            background: #dc2626;
+            transform: rotate(90deg);
+        }
+
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(99, 102, 241, 0.9);
+            border: none;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .lightbox-nav:hover {
+            background: var(--primary-color);
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .lightbox-prev {
+            left: 20px;
+        }
+
+        .lightbox-next {
+            right: 20px;
+        }
+
+        /* Stats Section */
+        .project-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(99, 102, 241, 0.1);
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 1.5rem;
+            background: rgba(99, 102, 241, 0.05);
+            border-radius: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .stat-item:hover {
+            background: rgba(99, 102, 241, 0.1);
+            transform: translateY(-5px);
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .main-header {
+                padding: 3rem 1rem 2rem;
+            }
+
+            .project-card {
+                padding: 2rem 1.5rem;
+            }
+
+            .project-info h2 {
+                font-size: 1.5rem;
+            }
+
+            .features {
+                grid-template-columns: 1fr;
+            }
+
+            .project-gallery {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+                gap: 1rem;
+            }
+
+            .view-toggle {
+                display: none;
+            }
+
+            .lightbox-nav {
+                width: 40px;
+                height: 40px;
+                font-size: 1.25rem;
+            }
+
+            .lightbox-prev {
+                left: 10px;
+            }
+
+            .lightbox-next {
+                right: 10px;
+            }
+        }
+
+        /* Loading Animation */
+        .loading {
+            opacity: 0.5;
+            pointer-events: none;
+        }
+
+        @keyframes shimmer {
+            0% {
+                background-position: -1000px 0;
+            }
+            100% {
+                background-position: 1000px 0;
+            }
+        }
+
+        .skeleton {
+            background: linear-gradient(90deg, rgba(99, 102, 241, 0.1) 25%, rgba(99, 102, 241, 0.2) 50%, rgba(99, 102, 241, 0.1) 75%);
+            background-size: 2000px 100%;
+            animation: shimmer 2s infinite;
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-animation"></div>
+
+    <header class="main-header">
+        <h1>Our Portfolio</h1>
+        <p>Showcasing our latest innovative projects</p>
+    </header>
+
+    <main class="portfolio-container">
+        <!-- Solar Dashboard Project -->
+        <section class="project-card">
+            <div class="project-header">
+                <div class="project-icon">☀️</div>
+                <div class="project-info">
+                    <h2>Solar Real-time Dashboard</h2>
+                </div>
+            </div>
+            
+            <p class="description">A comprehensive full-stack IoT solution designed for real-time solar energy monitoring and management. This platform provides high-performance data visualization and remote device management capabilities.</p>
+            
+            <div class="project-tags">
+                <span class="tag">IoT Integration</span>
+                <span class="tag">Real-time Analytics</span>
+                <span class="tag">React Dashboard</span>
+                <span class="tag">JWT Auth</span>
+                <span class="tag">WebSocket</span>
+            </div>
+
+            <ul class="features">
+                <li>
+                    <strong>🔌 IoT Integration</strong>
+                    Real-time data collection and processing from solar panels with WebSocket connectivity
+                </li>
+                <li>
+                    <strong>⚙️ Remote Configuration</strong>
+                    Over-the-air updates and remote device management capabilities
+                </li>
+                <li>
+                    <strong>🔐 Secure Authentication</strong>
+                    Multi-layer security with JWT tokens and OAuth 2.0 integration
+                </li>
+                <li>
+                    <strong>📊 Advanced Analytics</strong>
+                    Historical data visualization with predictive performance metrics
+                </li>
+            </ul>
+
+            <div class="gallery-section">
+                <div class="gallery-header">
+                    <div class="view-toggle">
+                        <button class="view-btn active" data-view="grid">Grid</button>
+                        <button class="view-btn" data-view="masonry">Masonry</button>
+                    </div>
+                </div>
+                <div class="project-gallery" data-project="solar">
+                    <div class="gallery-item">
+                        <img src="./img/solar_1.png" alt="Solar Dashboard Home Interface">
+                        <div class="gallery-overlay">
+                            <p>Home Dashboard Overview</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="./img/solar_2.png" alt="Real-time Monitoring Panel">
+                        <div class="gallery-overlay">
+                            <p>Real-time Monitoring</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="./img/solar_3.png" alt="Analytics Dashboard">
+                        <div class="gallery-overlay">
+                            <p>Analytics & Insights</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="./img/solar_4.png" alt="Device Configuration">
+                        <div class="gallery-overlay">
+                            <p>Device Configuration</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="./img/solar_5.png" alt="Historical Data View">
+                        <div class="gallery-overlay">
+                            <p>Historical Data</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="./img/solar_6.png" alt="System Settings">
+                        <div class="gallery-overlay">
+                            <p>System Settings</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="./img/solar_7.png" alt="Mobile Responsive View">
+                        <div class="gallery-overlay">
+                            <p>Mobile Interface</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-stats">
+                <div class="stat-item">
+                    <span class="stat-number">99.9%</span>
+                    <span class="stat-label">Uptime</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">< 2s</span>
+                    <span class="stat-label">Response Time</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">1000+</span>
+                    <span class="stat-label">Active Devices</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">24/7</span>
+                    <span class="stat-label">Monitoring</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- BMS Application Project -->
+        <section class="project-card">
+            <div class="project-header">
+                <div class="project-icon">🔋</div>
+                <div class="project-info">
+                    <h2>BLE Battery Management System</h2>
+                </div>
+            </div>
+            
+            <p class="description">A sophisticated cross-platform battery management solution featuring Bluetooth Low Energy connectivity. Seamlessly monitor and manage battery systems through both web and native Android applications.</p>
+            
+            <div class="project-tags">
+                <span class="tag">BLE Technology</span>
+                <span class="tag">Cross-Platform</span>
+                <span class="tag">Android Native</span>
+                <span class="tag">Web Dashboard</span>
+                <span class="tag">Real-time Sync</span>
+            </div>
+
+            <ul class="features">
+                <li>
+                    <strong>📱 Bluetooth Connectivity</strong>
+                    BLE 5.0 integration for efficient low-power device communication
+                </li>
+                <li>
+                    <strong>⚡ Dynamic Battery Status</strong>
+                    Real-time monitoring of battery levels, health, and performance metrics
+                </li>
+                <li>
+                    <strong>🌐 Cross-Platform Support</strong>
+                    Unified experience across web dashboard and Android native app
+                </li>
+                <li>
+                    <strong>📡 Connection Management</strong>
+                    Automatic device discovery, pairing, and connection status tracking
+                </li>
+            </ul>
+
+            <div class="gallery-section">
+                <div class="gallery-header">
+                    <div class="view-toggle">
+                        <button class="view-btn active" data-view="grid">Grid</button>
+                        <button class="view-btn" data-view="masonry">Masonry</button>
+                    </div>
+                </div>
+                <div class="project-gallery" data-project="bms">
+                    <div class="gallery-item">
+                        <img src="./img/bms_app_1.jpeg" alt="BMS App Home Screen">
+                        <div class="gallery-overlay">
+                            <p>App Home Screen</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="./img/bms_app_2.jpeg" alt="Battery Dashboard">
+                        <div class="gallery-overlay">
+                            <p>Battery Dashboard</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="./img/bms_app_3.jpeg" alt="App Settings Panel">
+                        <div class="gallery-overlay">
+                            <p>Settings Panel</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="./img/bms_app_4.jpeg" alt="Notifications Center">
+                        <div class="gallery-overlay">
+                            <p>Notifications Center</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="./img/bms_app_5.jpeg" alt="Device List View">
+                        <div class="gallery-overlay">
+                            <p>Device List</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="./img/bms_web_1.png" alt="Web Dashboard">
+                        <div class="gallery-overlay">
+                            <p>Web Dashboard</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="./img/bms_web_2.png" alt="Battery Analytics">
+                        <div class="gallery-overlay">
+                            <p>Battery Analytics</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="./img/bms_web_3.png" alt="Historical Data">
+                        <div class="gallery-overlay">
+                            <p>Historical Data</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-stats">
+                <div class="stat-item">
+                    <span class="stat-number">5.0</span>
+                    <span class="stat-label">BLE Version</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">50+</span>
+                    <span class="stat-label">Devices Supported</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">< 1s</span>
+                    <span class="stat-label">Sync Speed</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">2</span>
+                    <span class="stat-label">Platforms</span>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox">
+        <div class="lightbox-content">
+            <button class="lightbox-close" id="lightbox-close">&times;</button>
+            <button class="lightbox-nav lightbox-prev" id="lightbox-prev">‹</button>
+            <button class="lightbox-nav lightbox-next" id="lightbox-next">›</button>
+            <img id="lightbox-img" src="" alt="Lightbox Image">
+        </div>
+    </div>
+
+    <script>
+        // Lightbox functionality
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+        const lightboxClose = document.getElementById('lightbox-close');
+        const lightboxPrev = document.getElementById('lightbox-prev');
+        const lightboxNext = document.getElementById('lightbox-next');
+        
+        let currentProject = '';
+        let currentImageIndex = 0;
+        let projectImages = [];
+
+        // Open lightbox on image click
+        document.querySelectorAll('.gallery-item').forEach((item, index) => {
+            item.addEventListener('click', function() {
+                const img = this.querySelector('img');
+                const gallery = this.closest('.project-gallery');
+                currentProject = gallery.dataset.project;
+                projectImages = Array.from(gallery.querySelectorAll('.gallery-item img'));
+                currentImageIndex = projectImages.indexOf(img);
+                
+                lightboxImg.src = img.src;
+                lightboxImg.alt = img.alt;
+                lightbox.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            });
+        });
+
+        // Close lightbox
+        function closeLightbox() {
+            lightbox.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        lightboxClose.addEventListener('click', closeLightbox);
+        lightbox.addEventListener('click', function(e) {
+            if (e.target === lightbox) {
+                closeLightbox();
+            }
+        });
+
+        // Navigate images
+        function showImage(index) {
+            if (index < 0) {
+                currentImageIndex = projectImages.length - 1;
+            } else if (index >= projectImages.length) {
+                currentImageIndex = 0;
+            } else {
+                currentImageIndex = index;
+            }
+            
+            lightboxImg.src = projectImages[currentImageIndex].src;
+            lightboxImg.alt = projectImages[currentImageIndex].alt;
+        }
+
+        lightboxPrev.addEventListener('click', (e) => {
+            e.stopPropagation();
+            showImage(currentImageIndex - 1);
+        });
+
+        lightboxNext.addEventListener('click', (e) => {
+            e.stopPropagation();
+            showImage(currentImageIndex + 1);
+        });
+
+        // Keyboard navigation
+        document.addEventListener('keydown', function(e) {
+            if (!lightbox.classList.contains('active')) return;
+            
+            if (e.key === 'Escape') {
+                closeLightbox();
+            } else if (e.key === 'ArrowLeft') {
+                showImage(currentImageIndex - 1);
+            } else if (e.key === 'ArrowRight') {
+                showImage(currentImageIndex + 1);
+            }
+        });
+
+        // View toggle functionality
+        document.querySelectorAll('.view-toggle').forEach(toggle => {
+            document.querySelector('.main-header')
+            const buttons = toggle.querySelectorAll('.view-btn');
+            const gallery = toggle.closest('.gallery-section').querySelector('.project-gallery');
+            
+            buttons.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    buttons.forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    const view = this.dataset.view;
+                    if (view === 'masonry') {
+                        gallery.classList.add('masonry');
+                    } else {
+                        gallery.classList.remove('masonry');
+                    }
+                });
+            });
+        });
+
+        // Smooth scroll reveal animation
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.gallery-item').forEach(item => {
+            item.style.opacity = '0';
+            item.style.transform = 'translateY(20px)';
+            item.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(item);
+        });
+
+        // Add loading state simulation for images
+        document.querySelectorAll('.gallery-item img').forEach(img => {
+            img.addEventListener('load', function() {
+                this.closest('.gallery-item').classList.remove('loading');
+            });
+            
+            if (!img.complete) {
+                img.closest('.gallery-item').classList.add('loading');
+            }
+        });
+
+        console.log('🚀 Enhanced Portfolio Loaded Successfully!');
+        console.log('Features: Lightbox, Masonry Grid, Smooth Animations, Keyboard Navigation');
+    </script>
+</body>
+</html>
