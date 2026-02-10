@@ -162,11 +162,38 @@
             box-shadow: 0 6px 20px rgba(37, 99, 235, 0.4);
         }
 
-        .btn-secondary {
-            background: transparent;
-            color: var(--accent);
-            border: 2px solid var(--accent);
-        }
+        /* Update your existing .btn-secondary class to include the animation */
+.btn-secondary {
+    background: transparent;
+    color: var(--accent);
+    border: 2px solid var(--accent);
+    
+    /* Add these two lines */
+    animation: pulseHighlight 2s infinite;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Define the continuous highlight animation */
+@keyframes pulseHighlight {
+    0% {
+        box-shadow: 0 0 0 0 rgba(var(--accent-rgb), 0.4);
+        transform: scale(1);
+    }
+    70% {
+        box-shadow: 0 0 0 10px rgba(var(--accent-rgb), 0);
+        transform: scale(1.03); /* Tiny growth to look "alive" */
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(var(--accent-rgb), 0);
+        transform: scale(1);
+    }
+}
+
+/* Optional: Pause animation on hover so it doesn't fight with your hover styles */
+.btn-secondary:hover {
+    animation-play-state: paused;
+}
 
         .btn-secondary:hover {
             background: var(--accent);
@@ -484,13 +511,10 @@
         </p>
         
         <div class="cta-buttons">
-            <a href="#contact" class="btn-primary">Start Your Project</a>
-            <a href="#portfolio" class="btn-secondary">View Our Work</a>
+            <a href="./port.html" class="btn-secondary">View Our Work</a>
         </div>
         
-        <div id="status-chip">
-            ● Available for New Projects
-        </div>
+        
     </div>
 </header>
 
